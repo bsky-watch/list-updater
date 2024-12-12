@@ -58,7 +58,11 @@ func main() {
 				continue
 			}
 
-			log.Info().Msgf("%s: logged in as %s", name, resp.Handle)
+			if name == "DEFAULT" {
+				log.Info().Msgf("%s: logged in successfully", name)
+			} else {
+				log.Info().Msgf("%s: logged in as %s", name, resp.Handle)
+			}
 
 			didToClient[resp.Did] = client
 
