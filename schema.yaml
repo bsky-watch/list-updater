@@ -1,0 +1,94 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://bsky.watch/schema/list-descriptions
+title: Description of lists and their content
+type: object
+properties:
+  lists:
+    type: array
+    items:
+      $ref: '#/defs/list'
+
+defs:
+  list:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      did:
+        type: string
+      rkey:
+        type: string
+      entries:
+        $ref: '#/defs/set'
+      noAutoRemovals:
+        type: boolean
+
+  set:
+    oneOf:
+      - type: object
+        additionalProperties: false
+        properties:
+          union:
+            type: array
+            items:
+              $ref: '#/defs/set'
+      - type: object
+        additionalProperties: false
+        properties:
+          intersection:
+            type: array
+            items:
+              $refs: '#/defs/set'
+      - type: object
+        additionalProperties: false
+        properties:
+          difference:
+            type: object
+            properties:
+              left:
+                $ref: '#/defs/set'
+              right:
+                $ref: '#/defs/set'
+            additionalProperties: false
+      - type: object
+        additionalProperties: false
+        properties:
+          list:
+            type: object
+            properties:
+              did:
+                type: string
+              rkey:
+                type: string
+      - type: object
+        additionalProperties: false
+        properties:
+          followers:
+            type: string
+      - type: object
+        additionalProperties: false
+        properties:
+          follows:
+            type: string
+      - type: object
+        additionalProperties: false
+        properties:
+          blockedBy:
+            type: string
+      - type: object
+        additionalProperties: false
+        properties:
+          did:
+            type: string
+      - type: object
+        additionalProperties: false
+        properties:
+          file:
+            type: string
+      - type: object
+        additionalProperties: false
+        properties:
+          expandFollowers:
+            $ref: '#/defs/set'

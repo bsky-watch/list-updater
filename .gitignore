@@ -1,0 +1,6 @@
+bsky.auth
+bsky.auth.*
+*.txt
+*.lst
+*.tsv
+*.csv

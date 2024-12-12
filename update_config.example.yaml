@@ -1,0 +1,7 @@
+# Example of a config file for ./cmd/update specifically
+
+name: Blocked by bsky.app
+did: "<your DID here>"
+rkey: <rkey of your list>
+entries:
+  blockedBy: "did:plc:z72i7hdynmk6r22z27h6tvur"
