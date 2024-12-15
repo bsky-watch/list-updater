@@ -19,7 +19,7 @@ import (
 	"bsky.watch/utils/didset"
 )
 
-func splitInBatshes[T any](s []T, batchSize int) [][]T {
+func splitInBatches[T any](s []T, batchSize int) [][]T {
 	var r [][]T
 	for i := 0; i < len(s); i += batchSize {
 		if i+batchSize < len(s) {
@@ -102,7 +102,7 @@ func UpdateMuteList(ctx context.Context, set didset.DIDSet, listUrl string, clie
 
 	const batchSize = 50
 	if !dryRun {
-		for _, batch := range splitInBatshes(toDelete, batchSize) {
+		for _, batch := range splitInBatches(toDelete, batchSize) {
 			req := &comatproto.RepoApplyWrites_Input{
 				Repo: self,
 			}
@@ -137,7 +137,7 @@ func UpdateMuteList(ctx context.Context, set didset.DIDSet, listUrl string, clie
 
 	toAdd := maps.Keys(source)
 	if !dryRun {
-		for _, batch := range splitInBatshes(toAdd, batchSize) {
+		for _, batch := range splitInBatches(toAdd, batchSize) {
 			req := &comatproto.RepoApplyWrites_Input{
 				Repo: self,
 			}
